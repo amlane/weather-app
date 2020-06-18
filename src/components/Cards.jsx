@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { tempConverter } from "../utils/tempConverter";
+import CurrentWeather from "./CurrentWeather";
+
 function Cards() {
   const [lat, setLat] = useState(null);
   const [lon, setLon] = useState(null);
-  const [data, setData] = useState(null);
+  const [weatherData, setWeatherData] = useState(null);
+  const [locationData, setLocationData] = useState(null);
+
   useEffect(() => {
+    // TODO - handle if user has geolocation turned off
     navigator.geolocation.getCurrentPosition((position) => {
       // console.log(position.coords.latitude);
       // console.log(position.coords.longitude);
@@ -15,8 +19,7 @@ function Cards() {
   }, []);
 
   useEffect(() => {
-    console.log("testing");
-    // don't make the API
+    // won't allow the API calls until we have the lat/lon from the navigator
     if (lat !== null && lon !== null) {
       console.log("API request made");
       axios
@@ -25,17 +28,32 @@ function Cards() {
         )
         .then((res) => {
           console.log(res);
-          setData(res.data);
+          setWeatherData(res.data);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+
+      axios
+        .get(
+          `https://geoservices.tamu.edu/Services/ReverseGeocoding/WebService/v04_01/HTTP/default.aspx?lat=${lat}&lon=${lon}&format=json&version=4.10&apiKey=${process.env.REACT_APP_REVERSE_GEOCODING_API_KEY}`
+        )
+        .then((res) => {
+          console.log(res);
+          setLocationData(res.data);
         })
         .catch((err) => {
           console.log(err.response);
         });
     }
   }, [lat, lon]);
-
-  // console.log(tempConverter(298.08));
-  if (!data) return <h1>Loading...</h1>;
-  return <div>{tempConverter(data.current.temp)} degrees</div>;
+  // console.log(process.env.REACT_APP_REVERSE_GEOCODING_API_KEY);
+  if (!weatherData || !locationData) return <h1>Loading...</h1>;
+  return (
+    <>
+      <CurrentWeather data={weatherData} location={locationData} />
+    </>
+  );
 }
 
 export default Cards;
