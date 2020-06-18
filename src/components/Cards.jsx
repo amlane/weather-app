@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { tempConverter } from "../utils/tempConverter";
 function Cards() {
   const [lat, setLat] = useState(null);
   const [lon, setLon] = useState(null);
-  const [data, setData] = useState({});
+  const [data, setData] = useState(null);
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       // console.log(position.coords.latitude);
@@ -24,6 +25,7 @@ function Cards() {
         )
         .then((res) => {
           console.log(res);
+          setData(res.data);
         })
         .catch((err) => {
           console.log(err.response);
@@ -31,9 +33,9 @@ function Cards() {
     }
   }, [lat, lon]);
 
-  console.log(lat, lon);
-
-  return <div>card</div>;
+  // console.log(tempConverter(298.08));
+  if (!data) return <h1>Loading...</h1>;
+  return <div>{tempConverter(data.current.temp)} degrees</div>;
 }
 
 export default Cards;
