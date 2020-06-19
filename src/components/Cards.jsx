@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "../App.css";
 import CurrentWeather from "./CurrentWeather";
+import WeeklyForecast from "./WeeklyForecast";
 
 function Cards() {
   const [lat, setLat] = useState(null);
   const [lon, setLon] = useState(null);
   const [weatherData, setWeatherData] = useState(null);
-  const [locationData, setLocationData] = useState(null);
+  // const [locationData, setLocationData] = useState(null);
 
   useEffect(() => {
     // TODO - handle if user has geolocation turned off
@@ -34,24 +36,30 @@ function Cards() {
           console.log(err.response);
         });
 
-      axios
-        .get(
-          `https://geoservices.tamu.edu/Services/ReverseGeocoding/WebService/v04_01/HTTP/default.aspx?lat=${lat}&lon=${lon}&format=json&version=4.10&apiKey=${process.env.REACT_APP_REVERSE_GEOCODING_API_KEY}`
-        )
-        .then((res) => {
-          console.log(res);
-          setLocationData(res.data);
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
+      // axios
+      //   .get(
+      //     `https://geoservices.tamu.edu/Services/ReverseGeocoding/WebService/v04_01/HTTP/default.aspx?lat=${lat}&lon=${lon}&format=json&version=4.10&apiKey=${process.env.REACT_APP_REVERSE_GEOCODING_API_KEY}`
+      //   )
+      //   .then((res) => {
+      //     console.log(res);
+      //     setLocationData(res.data);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err.response);
+      //   });
     }
   }, [lat, lon]);
   // console.log(process.env.REACT_APP_REVERSE_GEOCODING_API_KEY);
-  if (!weatherData || !locationData) return <h1>Loading...</h1>;
+  // if (!weatherData || !locationData) return <h1>Loading...</h1>;
+  if (!weatherData) return <h1>Loading...</h1>;
   return (
     <>
-      <CurrentWeather data={weatherData} location={locationData} />
+      <header className="App-header">
+        <CurrentWeather data={weatherData} />
+      </header>
+      <section className="App-header">
+        <WeeklyForecast data={weatherData} />
+      </section>
     </>
   );
 }
