@@ -6,9 +6,19 @@ function CurrentWeather({ data }) {
   return (
     <>
       {/* <p>{location.StreetAddresses[0].City}</p> */}
-      <p>Jefferson City</p>
-      <div>{data.current.weather[0].main}</div>
-      <p>{tempConverter(data.current.temp)} &#176;</p>
+      <div style={{ fontSize: "30px" }}>Jefferson City</div>
+      <div
+        style={{
+          fontSize: "18px",
+          textTransform: "capitalize",
+          fontWeight: "light",
+        }}
+      >
+        {data.current.weather[0].description}
+      </div>
+      <div style={{ fontSize: "80px", fontWeight: "light" }}>
+        {tempConverter(data.current.temp)}&#176;
+      </div>
     </>
   );
 }
