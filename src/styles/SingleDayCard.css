@@ -1,0 +1,24 @@
+.single-day-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+}
+
+.display-day {
+  width: 25%;
+  text-align: start;
+}
+
+.single-day-card .temps {
+  display: flex;
+  margin: 0 5px;
+}
+
+.single-day-card .temps p {
+  margin: 0 5px;
+}
+
+.single-day-card .temps p:first-child {
+  font-weight: bold;
+}

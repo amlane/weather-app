@@ -49,7 +49,7 @@ function Cards() {
       //   });
     }
   }, [lat, lon]);
-  // console.log(process.env.REACT_APP_REVERSE_GEOCODING_API_KEY);
+
   // if (!weatherData || !locationData) return <h1>Loading...</h1>;
   if (!weatherData) return <h1>Loading...</h1>;
   return (
