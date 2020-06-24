@@ -13,16 +13,24 @@ function SingleDayCard({ daily, i }) {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        fontSize: "16px",
+        fontSize: "18px",
       }}
     >
-      <p>{displayDay()}</p>
+      <p style={{ width: "25%", textAlign: "start", fontWeight: "bold" }}>
+        {displayDay()}
+      </p>
       <img
-        src={`http://openweathermap.org/img/wn/${daily.weather[0].icon}@2x.png`}
+        src={`http://openweathermap.org/img/wn/${daily.weather[0].icon}.png`}
         alt={daily.weather[0].main}
       />
-      <p style={{ textTransform: "bold" }}>{tempConverter(daily.temp.max)}</p>
-      <p style={{ textTransform: "light" }}>{tempConverter(daily.temp.min)}</p>
+      <div style={{ display: "flex" }}>
+        <p style={{ fontWeight: "bold", margin: "0 5px" }}>
+          {tempConverter(daily.temp.max)}
+        </p>
+        <p style={{ fontWeight: "light", margin: "0 5px" }}>
+          {tempConverter(daily.temp.min)}
+        </p>
+      </div>
     </div>
   );
 }
