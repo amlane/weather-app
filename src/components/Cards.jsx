@@ -8,7 +8,7 @@ function Cards() {
   const [lat, setLat] = useState(null);
   const [lon, setLon] = useState(null);
   const [weatherData, setWeatherData] = useState(null);
-  // const [locationData, setLocationData] = useState(null);
+  const [locationData, setLocationData] = useState(null);
 
   useEffect(() => {
     // TODO - handle if user has geolocation turned off
@@ -35,27 +35,27 @@ function Cards() {
         .catch((err) => {
           console.log(err.response);
         });
-
-      // axios
-      //   .get(
-      //     `https://geoservices.tamu.edu/Services/ReverseGeocoding/WebService/v04_01/HTTP/default.aspx?lat=${lat}&lon=${lon}&format=json&version=4.10&apiKey=${process.env.REACT_APP_REVERSE_GEOCODING_API_KEY}`
-      //   )
-      //   .then((res) => {
-      //     console.log(res);
-      //     setLocationData(res.data);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err.response);
-      //   });
+      // free reverse geocoding services found at https://geoservices.tamu.edu
+      axios
+        .get(
+          `https://geoservices.tamu.edu/Services/ReverseGeocoding/WebService/v04_01/HTTP/default.aspx?lat=${lat}&lon=${lon}&format=json&version=4.10&apiKey=${process.env.REACT_APP_REVERSE_GEOCODING_API_KEY}`
+        )
+        .then((res) => {
+          console.log(res);
+          setLocationData(res.data);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
     }
   }, [lat, lon]);
 
-  // if (!weatherData || !locationData) return <h1>Loading...</h1>;
-  if (!weatherData) return <h1>Loading...</h1>;
+  if (!weatherData || !locationData) return <h1>Loading...</h1>;
+  // if (!weatherData) return <h1>Loading...</h1>;
   return (
     <>
       <header className="App-header">
-        <CurrentWeather data={weatherData} />
+        <CurrentWeather data={weatherData} location={locationData} />
       </header>
       <section className="App-header">
         <WeeklyForecast data={weatherData} />

@@ -3,11 +3,13 @@ import { getDayOfWeek } from "../utils/getDayOfWeek";
 import { tempConverter } from "../utils/tempConverter";
 import "../styles/CurrentWeather.css";
 
-function CurrentWeather({ data }) {
+function CurrentWeather({ data, location }) {
   return (
     <>
-      {/* <p>{location.StreetAddresses[0].City}</p> */}
-      <div className="city-name">Jefferson City</div>
+      <div className="city-name">
+        {location.StreetAddresses[0].City.toLowerCase()}
+      </div>
+      {/* <div className="city-name">Jefferson City</div> */}
       <div className="weather-description">
         {data.current.weather[0].description}
       </div>
