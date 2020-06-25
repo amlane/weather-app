@@ -26,7 +26,7 @@ function Cards() {
       console.log("API request made");
       axios
         .get(
-          `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={}&appid=${process.env.REACT_APP_WEATHER_APP_API_KEY}`
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${process.env.REACT_APP_WEATHER_APP_API_KEY}`
         )
         .then((res) => {
           console.log(res);
