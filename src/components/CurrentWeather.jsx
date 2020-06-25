@@ -18,7 +18,7 @@ function CurrentWeather({ data, location }) {
       </div>
       <section className="today">
         <div>
-          <span>TODAY</span> <span>{getDayOfWeek(-1)}</span>
+          <span>{getDayOfWeek(-1)}</span> <span>TODAY</span>
         </div>
       </section>
     </>

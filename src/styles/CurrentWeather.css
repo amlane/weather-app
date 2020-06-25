@@ -21,3 +21,8 @@
   font-size: 18px;
   margin: 0 0 10px;
 }
+
+.today span:last-child {
+  font-weight: bold;
+  font-size: 14px;
+}
