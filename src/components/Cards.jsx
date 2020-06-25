@@ -3,6 +3,7 @@ import axios from "axios";
 import "../styles/App.css";
 import CurrentWeather from "./CurrentWeather";
 import WeeklyForecast from "./WeeklyForecast";
+import Loader from "react-loader-spinner";
 
 function Cards() {
   const [lat, setLat] = useState(null);
@@ -50,7 +51,16 @@ function Cards() {
     }
   }, [lat, lon]);
 
-  if (!weatherData || !locationData) return <h1>Loading...</h1>;
+  if (!weatherData || !locationData)
+    return (
+      <Loader
+        type="Oval"
+        color="#fff"
+        height={80}
+        width={80}
+        style={{ margin: "100px auto" }}
+      />
+    );
   // if (!weatherData) return <h1>Loading...</h1>;
   return (
     <>
