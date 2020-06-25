@@ -12,7 +12,7 @@ function SingleDayCard({ daily, i }) {
     <div className="single-day-card ">
       <p className="display-day">{displayDay()}</p>
       <img
-        src={`http://openweathermap.org/img/wn/${daily.weather[0].icon}.png`}
+        src={`https://openweathermap.org/img/wn/${daily.weather[0].icon}.png`}
         alt={daily.weather[0].main}
       />
       <div className="temps">
